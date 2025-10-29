@@ -7,14 +7,21 @@
   <link href="https://cdn.jsdelivr.net/npm/vazir-font@30.1.0/dist/font-face.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
+    :root {
+      --main-color: #179d99;
+      --dark-color: #0e6e6b;
+      --light-bg: #f5fafa;
+    }
+
     body {
       font-family: Vazir, sans-serif;
       margin: 0;
-      background-color: #f9fbff;
+      background-color: var(--light-bg);
       color: #222;
       overflow-x: hidden;
     }
 
+    /* نوار بالا */
     nav {
       background: white;
       position: sticky;
@@ -27,7 +34,7 @@
     }
 
     nav a {
-      color: #1d3ede;
+      color: var(--main-color);
       text-decoration: none;
       padding: 15px 25px;
       font-weight: bold;
@@ -35,26 +42,27 @@
     }
 
     nav a:hover {
-      color: #7433ff;
+      color: var(--dark-color);
     }
 
+    /* هدر */
     header {
-      background: linear-gradient(135deg, #000000, #7433ff);
+      background: linear-gradient(135deg, var(--main-color), var(--dark-color));
       color: white;
       text-align: center;
-      padding: 120px 20px 100px;
+      padding: 120px 20px 140px;
       position: relative;
       overflow: hidden;
     }
 
-    header::before {
+    header::after {
       content: "";
       position: absolute;
-      bottom: -1px;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 120px;
-      background: url('https://raw.githubusercontent.com/mahmoud-ajadi/wave-shape-assets/main/wave-light.svg') no-repeat bottom;
+      background: url('https://raw.githubusercontent.com/mahmoud-ajadi/wave-shape-assets/main/green-wave.svg') no-repeat bottom;
       background-size: cover;
     }
 
@@ -69,6 +77,7 @@
       margin: auto;
     }
 
+    /* کارت‌های خدمات */
     .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -81,11 +90,12 @@
       padding: 30px;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .service-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
 
     .service-card img {
@@ -94,6 +104,7 @@
       margin-bottom: 15px;
     }
 
+    /* تماس با ما */
     .contact {
       display: flex;
       flex-wrap: wrap;
@@ -129,23 +140,27 @@
       height: 300px;
       border-radius: 12px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
+    /* بخش تلگرام */
     .telegram-section {
       text-align: center;
-      background: #f1f4ff;
+      background: white;
       padding: 80px 20px;
       border-radius: 16px;
       margin-top: 50px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .telegram-section h2 {
-      color: #1d3ede;
+      color: var(--main-color);
+      margin-bottom: 10px;
     }
 
     .telegram-button {
       display: inline-block;
-      background: linear-gradient(135deg, #1d3ede, #7433ff);
+      background: var(--main-color);
       color: white;
       padding: 15px 40px;
       border-radius: 50px;
@@ -157,12 +172,13 @@
     }
 
     .telegram-button:hover {
+      background: var(--dark-color);
       transform: translateY(-4px);
-      background: linear-gradient(135deg, #7433ff, #1d3ede);
     }
 
+    /* فوتر */
     footer {
-      background: #1d3ede;
+      background: var(--main-color);
       color: white;
       text-align: center;
       padding: 20px;
@@ -172,7 +188,6 @@
     html {
       scroll-behavior: smooth;
     }
-
   </style>
 </head>
 <body>
@@ -182,20 +197,20 @@
     <a href="#home">خانه</a>
     <a href="#services">خدمات</a>
     <a href="#contact">تماس با ما</a>
-    <a href="#about">درباره ما</a>
     <a href="#bot">ربات تلگرام</a>
+    <a href="#about">درباره ما</a>
   </nav>
 
   <!-- هدر -->
   <header id="home" data-aos="fade-up">
-    <img src="logo.png" alt="لوگو کافی نت توسن" class="logo">
+    <img src="logo.png" alt="لوگو کافی‌نت توسن" class="logo">
     <h1>ربات کافی‌نت توسن</h1>
     <p>ارائه‌دهنده‌ی خدمات هوشمند کافی‌نت و امور اداری</p>
   </header>
 
   <!-- خدمات -->
   <section id="services" data-aos="fade-up">
-    <h2 style="text-align:center; color:#1d3ede;">خدمات کافی‌نت توسن</h2>
+    <h2 style="text-align:center; color:var(--main-color);">خدمات کافی‌نت توسن</h2>
     <div class="services">
       <div class="service-card" data-aos="zoom-in"><img src="ثبت‌نام‌های اینترنتی.png"><h3>ثبت‌نام‌های اینترنتی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات دانشجویی.png"><h3>خدمات دانشجویی</h3></div>
@@ -214,7 +229,7 @@
 
   <!-- تماس با ما -->
   <section id="contact" data-aos="fade-up">
-    <h2 style="text-align:center; color:#1d3ede;">تماس با ما</h2>
+    <h2 style="text-align:center; color:var(--main-color);">تماس با ما</h2>
     <div class="contact">
       <div class="contact-info">
         <p><strong>شماره تماس:</strong> 09390945414</p>
@@ -228,21 +243,21 @@
         </div>
       </div>
       <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6394.987911456988!2d46.25213816694788!3d37.385590860151225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b1100575b1c35%3A0xff93373bd2491d40!2z2qnYp9mB24wg2YbYqiDYqtmI2LPZhg!5e1!3m2!1sfa!2s!4v1759837645204!5m2!1sfa!2s" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- بخش ربات تلگرام -->
+  <!-- بخش ربات -->
   <section id="bot" class="telegram-section" data-aos="fade-up">
-    <h2>ارتباط مستقیم با ربات کافی‌نت توسن</h2>
-    <p>برای انجام سریع خدمات آنلاین، وارد ربات تلگرام ما شوید.</p>
-    <a href="https://t.me/tusan_cofeenet_bot" class="telegram-button">ورود به ربات تلگرام</a>
+    <h2>ارتباط با ربات کافی‌نت توسن</h2>
+    <p>برای انجام سریع خدمات آنلاین، وارد ربات تلگرام شوید:</p>
+    <a href="https://t.me/tusan_c_bot" class="telegram-button">ورود به ربات تلگرام</a>
   </section>
 
   <!-- درباره ما -->
   <section id="about" data-aos="fade-up">
-    <h2 style="text-align:center; color:#1d3ede;">درباره کافی‌نت توسن</h2>
+    <h2 style="text-align:center; color:var(--main-color);">درباره کافی‌نت توسن</h2>
     <p style="text-align:center; max-width:700px; margin:auto;">
       کافی‌نت توسن با هدف ساده‌سازی امور اینترنتی و اداری برای عموم مردم، رباتی طراحی کرده که انجام خدمات آنلاین را سریع‌تر و راحت‌تر می‌سازد.
     </p>
