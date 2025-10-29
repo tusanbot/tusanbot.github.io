@@ -15,26 +15,6 @@
       overflow-x: hidden;
     }
 
-    header {
-      background: linear-gradient(135deg, #000000, #7433ff);
-      color: white;
-      text-align: center;
-      padding: 120px 20px 100px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: "";
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      background: url('https://raw.githubusercontent.com/mahmoud-ajadi/wave-shape-assets/main/wave-light.svg') no-repeat bottom;
-      background-size: cover;
-    }
-
     nav {
       background: white;
       position: sticky;
@@ -57,6 +37,26 @@
       color: #7433ff;
     }
 
+    header {
+      background: linear-gradient(135deg, #000000, #7433ff);
+      color: white;
+      text-align: center;
+      padding: 120px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: url('https://raw.githubusercontent.com/mahmoud-ajadi/wave-shape-assets/main/wave-light.svg') no-repeat bottom;
+      background-size: cover;
+    }
+
     .logo {
       width: 120px;
       margin-bottom: 20px;
@@ -66,6 +66,12 @@
       padding: 80px 20px;
       max-width: 1200px;
       margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1d3ede;
+      margin-bottom: 40px;
     }
 
     .services {
@@ -125,14 +131,44 @@
     .map {
       flex: 1;
       min-width: 300px;
-      height: 300px;
-      background: #e0e7ff;
       border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
+
+    .bot-section {
+      background: linear-gradient(135deg, #1d3ede, #7433ff);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 30px;
+      margin-top: 40px;
+    }
+
+    .bot-section h2 {
+      color: #fff;
+    }
+
+    .bot-section a {
+      display: inline-block;
+      background: white;
+      color: #1d3ede;
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
       font-weight: bold;
-      color: #555;
+      transition: all 0.3s;
+    }
+
+    .bot-section a:hover {
+      background: #ffde59;
+      color: #000;
+      transform: scale(1.05);
     }
 
     footer {
@@ -149,6 +185,7 @@
   </style>
 </head>
 <body>
+
   <!-- منو بالا -->
   <nav>
     <a href="#home">خانه</a>
@@ -166,16 +203,16 @@
 
   <!-- خدمات -->
   <section id="services" data-aos="fade-up">
-    <h2 style="text-align:center; color:#1d3ede;">خدمات کافی‌نت توسن</h2>
+    <h2>خدمات کافی‌نت توسن</h2>
     <div class="services">
-      <div class="service-card" data-aos="zoom-in"><img src="ثبت‌نام‌های اینترنتی.png"><h3>ثبت‌نام‌های اینترنتی</h3></div>
+      <div class="service-card" data-aos="zoom-in"><img src="ثبت نام های اینترنتی.png"><h3>ثبت نام‌های اینترنتی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات دانشجویی.png"><h3>خدمات دانشجویی</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="خدمات دانش‌آموزی.png"><h3>خدمات دانش‌آموزی</h3></div>
+      <div class="service-card" data-aos="zoom-in"><img src="خدمات دانش آموزی.png"><h3>خدمات دانش‌آموزی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="اظهارنامه مالیاتی.png"><h3>اظهارنامه مالیاتی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات بیمه.png"><h3>خدمات بیمه</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات خودرو.png"><h3>خدمات خودرو</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات بورس و سهام.png"><h3>خدمات بورس و سهام</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src=">پایان‌نامه.png"><h3>پایان‌نامه</h3></div>
+      <div class="service-card" data-aos="zoom-in"><img src="پایان نامه.png"><h3>پایان‌نامه</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="پروژه دانشجویی.png"><h3>پروژه دانشجویی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="پرینت و نشر.png"><h3>پرینت و نشر</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="ثبت پروانه و شرکت.png"><h3>ثبت پروانه و شرکت</h3></div>
@@ -183,9 +220,15 @@
     </div>
   </section>
 
+  <!-- بخش ورود به ربات -->
+  <section class="bot-section" data-aos="fade-up">
+    <h2>برای انجام خدمات آنلاین وارد ربات تلگرامی ما شوید</h2>
+    <a href="https://t.me/tusan_admin" target="_blank">ورود به ربات تلگرام</a>
+  </section>
+
   <!-- تماس با ما -->
   <section id="contact" data-aos="fade-up">
-    <h2 style="text-align:center; color:#1d3ede;">تماس با ما</h2>
+    <h2>تماس با ما</h2>
     <div class="contact">
       <div class="contact-info">
         <p><strong>شماره تماس:</strong> 09390945414</p>
@@ -195,18 +238,18 @@
           <a href="https://t.me/tusan_admin"><img src="telegram.png" alt="تلگرام"></a>
           <a href="https://eitaa.com/mahdi_msh"><img src="eitaa.png" alt="ایتا"></a>
           <a href="https://rubika.ir/tusan_c"><img src="rubika.png" alt="روبیکا"></a>
-          <a href="https://wa.me/989390945414"><img src="whatsapp.png" alt="واتساپ"><
+          <a href="https://wa.me/989390945414"><img src="whatsapp.png" alt="واتساپ"></a>
         </div>
       </div>
       <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6394.987911456988!2d46.25213816694788!3d37.385590860151225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b1100575b1c35%3A0xff93373bd2491d40!2z2qnYp9mB24wg2YbYqiDYqtmI2LPZhg!5e1!3m2!1sfa!2s!4v1759837645204!5m2!1sfa!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6394.987911456988!2d46.25213816694788!3d37.385590860151225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b1100575b1c35%3A0xff93373bd2491d40!2z2qnYp9mB24wg2YbYqiDYqtmI2LPZhg!5e1!3m2!1sfa!2s!4v1759837645204!5m2!1sfa!2s" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </section>
 
   <!-- درباره ما -->
   <section id="about" data-aos="fade-up">
-    <h2 style="text-align:center; color:#1d3ede;">درباره کافی‌نت توسن</h2>
+    <h2>درباره کافی‌نت توسن</h2>
     <p style="text-align:center; max-width:700px; margin:auto;">
       کافی‌نت توسن با هدف ساده‌سازی امور اینترنتی و اداری برای عموم مردم، رباتی طراحی کرده که انجام خدمات آنلاین را سریع‌تر و راحت‌تر می‌سازد.
     </p>
@@ -221,5 +264,6 @@
   <script>
     AOS.init({ duration: 1000 });
   </script>
+
 </body>
 </html>
