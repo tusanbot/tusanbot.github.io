@@ -1,274 +1,237 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ربات کافی‌نت توسن</title>
-  <link href="https://cdn.jsdelivr.net/npm/vazir-font@30.1.0/dist/font-face.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ربات کافی نت توسن</title>
+  <link rel="icon" href="logo.png" />
+  <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
   <style>
-    :root {
-      --main-color: #179d99;
-      --dark-color: #0e6e6b;
-      --light-bg: #f5fafa;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Vazir', sans-serif;
     }
 
     body {
-      font-family: Vazir, sans-serif;
-      margin: 0;
-      background-color: var(--light-bg);
-      color: #222;
+      background-color: #0e1c1b;
+      color: #f3f3f3;
       overflow-x: hidden;
     }
 
-    /* نوار بالا */
+    header {
+      position: relative;
+      background: linear-gradient(180deg, #179d99, #0e1c1b);
+      text-align: center;
+      padding: 120px 20px 180px;
+      overflow: hidden;
+    }
+
+    header img {
+      width: 120px;
+      margin-bottom: 15px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #d8f7f5;
+      font-size: 1.1rem;
+    }
+
     nav {
-      background: white;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 1000;
+      right: 0;
+      left: 0;
+      background: rgba(14, 28, 27, 0.95);
       display: flex;
       justify-content: center;
-      align-items: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      gap: 40px;
+      padding: 15px 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
     }
 
     nav a {
-      color: var(--main-color);
+      color: #fff;
       text-decoration: none;
-      padding: 15px 25px;
-      font-weight: bold;
+      font-weight: 500;
       transition: color 0.3s;
     }
 
     nav a:hover {
-      color: var(--dark-color);
-    }
-
-    /* هدر */
-    header {
-      background: linear-gradient(135deg, var(--main-color), var(--dark-color));
-      color: white;
-      text-align: center;
-      padding: 120px 20px 140px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      background: url('https://raw.githubusercontent.com/mahmoud-ajadi/wave-shape-assets/main/green-wave.svg') no-repeat bottom;
-      background-size: cover;
-    }
-
-    .logo {
-      width: 120px;
-      margin-bottom: 20px;
+      color: #179d99;
     }
 
     section {
-      padding: 80px 20px;
-      max-width: 1200px;
+      padding: 100px 20px;
+      text-align: center;
+      max-width: 900px;
       margin: auto;
     }
 
-    /* کارت‌های خدمات */
+    h2 {
+      color: #179d99;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+    }
+
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
     }
 
-    .service-card {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    }
-
-    .service-card img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 15px;
-    }
-
-    /* تماس با ما */
-    .contact {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: start;
-      gap: 20px;
-    }
-
-    .contact-info {
-      flex: 1;
-      min-width: 300px;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .social-icons img {
-      width: 36px;
-      height: 36px;
-      transition: transform 0.3s;
-    }
-
-    .social-icons img:hover {
-      transform: scale(1.15);
-    }
-
-    .map {
-      flex: 1;
-      min-width: 300px;
-      height: 300px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    /* بخش تلگرام */
-    .telegram-section {
-      text-align: center;
-      background: white;
-      padding: 80px 20px;
-      border-radius: 16px;
-      margin-top: 50px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .telegram-section h2 {
-      color: var(--main-color);
-      margin-bottom: 10px;
-    }
-
-    .telegram-button {
-      display: inline-block;
-      background: var(--main-color);
-      color: white;
-      padding: 15px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      margin-top: 20px;
+    .service-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 15px;
+      padding: 25px;
       transition: transform 0.3s, background 0.3s;
     }
 
-    .telegram-button:hover {
-      background: var(--dark-color);
-      transform: translateY(-4px);
+    .service-item:hover {
+      transform: translateY(-8px);
+      background: rgba(23,157,153,0.1);
     }
 
-    /* فوتر */
     footer {
-      background: var(--main-color);
-      color: white;
+      position: relative;
+      background: linear-gradient(0deg, #179d99, #0e1c1b);
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 80px 20px 160px;
+      color: #fff;
+      overflow: hidden;
     }
 
-    html {
-      scroll-behavior: smooth;
+    .contact-info {
+      line-height: 2;
+      font-size: 1rem;
+    }
+
+    .socials {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .socials img {
+      width: 35px;
+      transition: transform 0.3s;
+    }
+
+    .socials img:hover {
+      transform: scale(1.2);
+    }
+
+    /* موج SVG در بالا و پایین */
+    .wave {
+      position: absolute;
+      width: 200%;
+      left: -50%;
+      height: 200px;
+      fill: rgba(255,255,255,0.1);
+      animation: waveMove 12s linear infinite;
+    }
+
+    .wave.second {
+      animation-duration: 18s;
+      opacity: 0.6;
+    }
+
+    @keyframes waveMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
   </style>
 </head>
 <body>
 
-  <!-- منو بالا -->
   <nav>
     <a href="#home">خانه</a>
     <a href="#services">خدمات</a>
-    <a href="#contact">تماس با ما</a>
-    <a href="#bot">ربات تلگرام</a>
     <a href="#about">درباره ما</a>
+    <a href="#bot">ربات تلگرام</a>
+    <a href="#contact">تماس با ما</a>
   </nav>
 
-  <!-- هدر -->
-  <header id="home" data-aos="fade-up">
-    <img src="logo.png" alt="لوگو کافی‌نت توسن" class="logo">
-    <h1>ربات کافی‌نت توسن</h1>
-    <p>ارائه‌دهنده‌ی خدمات هوشمند کافی‌نت و امور اداری</p>
+  <header id="home">
+    <img src="logo.png" alt="لوگوی توسن">
+    <h1>ربات کافی نت توسن</h1>
+    <p>ارائه‌دهنده خدمات آنلاین و حضوری کافی‌نت به ساده‌ترین شکل</p>
+    <svg class="wave" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0,100 C300,200 900,0 1200,100 L1200,00 L0,0 Z"></path>
+    </svg>
+    <svg class="wave second" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0,120 C400,220 800,20 1200,120 L1200,00 L0,0 Z"></path>
+    </svg>
   </header>
 
-  <!-- خدمات -->
-  <section id="services" data-aos="fade-up">
-    <h2 style="text-align:center; color:var(--main-color);">خدمات کافی‌نت توسن</h2>
+  <section id="services">
+    <h2>خدمات ما</h2>
     <div class="services">
-      <div class="service-card" data-aos="zoom-in"><img src="ثبت‌نام‌های اینترنتی.png"><h3>ثبت‌نام‌های اینترنتی</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="خدمات دانشجویی.png"><h3>خدمات دانشجویی</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="خدمات دانش‌آموزی.png"><h3>خدمات دانش‌آموزی</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="اظهارنامه مالیاتی.png"><h3>اظهارنامه مالیاتی</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="خدمات بیمه.png"><h3>خدمات بیمه</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="خدمات خودرو.png"><h3>خدمات خودرو</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="خدمات بورس و سهام.png"><h3>خدمات بورس و سهام</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="پایان‌نامه.png"><h3>پایان‌نامه</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="پروژه دانشجویی.png"><h3>پروژه دانشجویی</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="پرینت و نشر.png"><h3>پرینت و نشر</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="ثبت پروانه و شرکت.png"><h3>ثبت پروانه و شرکت</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="وام و تسهیلات.png"><h3>وام و تسهیلات</h3></div>
+      <div class="service-item">ثبت نام های اینترنتی</div>
+      <div class="service-item">خدمات دانشجویی</div>
+      <div class="service-item">خدمات دانش آموزی</div>
+      <div class="service-item">اظهارنامه مالیاتی</div>
+      <div class="service-item">خدمات بیمه</div>
+      <div class="service-item">خدمات خودرو</div>
+      <div class="service-item">خدمات بورس و سهام</div>
+      <div class="service-item">پایان نامه</div>
+      <div class="service-item">پروژه دانشجویی</div>
+      <div class="service-item">پرینت و نشر</div>
+      <div class="service-item">ثبت پروانه و شرکت</div>
+      <div class="service-item">وام و تسهیلات</div>
     </div>
   </section>
 
-  <!-- تماس با ما -->
-  <section id="contact" data-aos="fade-up">
-    <h2 style="text-align:center; color:var(--main-color);">تماس با ما</h2>
-    <div class="contact">
-      <div class="contact-info">
-        <p><strong>شماره تماس:</strong> 09390945414</p>
-        <p><strong>آدرس:</strong> مراغه - خیابان ساسان (شهید مدرس) - جنب مسجد چهارده معصوم</p>
-        <p><strong>شبکه‌های اجتماعی:</strong></p>
-        <div class="social-icons">
-          <a href="https://t.me/tusan_admin"><img src="telegram.png" alt="تلگرام"></a>
-          <a href="https://eitaa.com/mahdi_msh"><img src="eitaa.png" alt="ایتا"></a>
-          <a href="https://rubika.ir/tusan_c"><img src="rubika.png" alt="روبیکا"></a>
-          <a href="https://wa.me/989390945414"><img src="whatsapp.png" alt="واتساپ"></a>
-        </div>
-      </div>
-      <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </div>
+  <section id="about">
+    <h2>درباره ما</h2>
+    <p>کافی نت توسن با ارائه ربات اختصاصی تلگرامی، فرآیند انجام خدمات را ساده‌تر، سریع‌تر و دقیق‌تر کرده است.  
+    هدف ما کاهش مراجعه حضوری و افزایش کیفیت خدمات دیجیتال است.</p>
   </section>
 
-  <!-- بخش ربات -->
+
+  
+  <footer id="contact">
+    <h2>تماس با ما</h2>
+    <div class="contact-info">
+      <p>📍 آدرس: مراغه - خیابان ساسان (شهید مدرس) - جنب مسجد چهارده معصوم</p>
+      <p>📞 شماره تماس: 09390945414</p>
+      <p>📨 آیدی تلگرام: @tusan_admin</p>
+      <p>📱 ایتا: mahdi_msh | روبیکا: tusan_c | شاد: tusan_cofeenet</p>
+    </div>
+
+    <div class="socials">
+      <img src="telegram.png" alt="تلگرام">
+      <img src="eitaa.png" alt="ایتا">
+      <img src="rubika.png" alt="روبیکا">
+      <img src="shad.png" alt="شاد">
+      <img src="whatsapp.png" alt="واتساپ">
+    </div>
+
+      <!-- بخش ربات تلگرام -->
   <section id="bot" class="telegram-section" data-aos="fade-up">
-    <h2>ارتباط با ربات کافی‌نت توسن</h2>
-    <p>برای انجام سریع خدمات آنلاین، وارد ربات تلگرام شوید:</p>
-    <a href="https://t.me/tusan_c_bot" class="telegram-button">ورود به ربات تلگرام</a>
+    <h2>ارتباط مستقیم با ربات کافی‌نت توسن</h2>
+    <p>برای انجام سریع خدمات آنلاین، وارد ربات تلگرام ما شوید.</p>
+    <a href="https://t.me/tusan_cofeenet_bot" class="telegram-button">ورود به ربات تلگرام</a>
   </section>
 
-  <!-- درباره ما -->
-  <section id="about" data-aos="fade-up">
-    <h2 style="text-align:center; color:var(--main-color);">درباره کافی‌نت توسن</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      کافی‌نت توسن با هدف ساده‌سازی امور اینترنتی و اداری برای عموم مردم، رباتی طراحی کرده که انجام خدمات آنلاین را سریع‌تر و راحت‌تر می‌سازد.
-    </p>
-  </section>
-
-  <!-- فوتر -->
-  <footer>
-    © 2025 کافی‌نت توسن – طراحی توسط تیم توسن
+    <svg class="wave" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0,100 C300,200 900,0 1200,100 L1200,200 L0,200 Z"></path>
+    </svg>
+    <svg class="wave second" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0,120 C400,220 800,20 1200,120 L1200,200 L0,200 Z"></path>
+    </svg>
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 1000 });</script>
 </body>
 </html>
