@@ -22,6 +22,7 @@
       z-index: 1000;
       display: flex;
       justify-content: center;
+      align-items: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
@@ -66,12 +67,6 @@
       padding: 80px 20px;
       max-width: 1200px;
       margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      color: #1d3ede;
-      margin-bottom: 40px;
     }
 
     .services {
@@ -131,44 +126,39 @@
     .map {
       flex: 1;
       min-width: 300px;
+      height: 300px;
       border-radius: 12px;
       overflow: hidden;
     }
 
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: 0;
+    .telegram-section {
+      text-align: center;
+      background: #f1f4ff;
+      padding: 80px 20px;
+      border-radius: 16px;
+      margin-top: 50px;
     }
 
-    .bot-section {
+    .telegram-section h2 {
+      color: #1d3ede;
+    }
+
+    .telegram-button {
+      display: inline-block;
       background: linear-gradient(135deg, #1d3ede, #7433ff);
       color: white;
-      text-align: center;
-      padding: 80px 20px;
-      border-radius: 30px;
-      margin-top: 40px;
-    }
-
-    .bot-section h2 {
-      color: #fff;
-    }
-
-    .bot-section a {
-      display: inline-block;
-      background: white;
-      color: #1d3ede;
       padding: 15px 40px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
-      transition: all 0.3s;
+      font-size: 18px;
+      margin-top: 20px;
+      transition: transform 0.3s, background 0.3s;
     }
 
-    .bot-section a:hover {
-      background: #ffde59;
-      color: #000;
-      transform: scale(1.05);
+    .telegram-button:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(135deg, #7433ff, #1d3ede);
     }
 
     footer {
@@ -182,6 +172,7 @@
     html {
       scroll-behavior: smooth;
     }
+
   </style>
 </head>
 <body>
@@ -192,6 +183,7 @@
     <a href="#services">خدمات</a>
     <a href="#contact">تماس با ما</a>
     <a href="#about">درباره ما</a>
+    <a href="#bot">ربات تلگرام</a>
   </nav>
 
   <!-- هدر -->
@@ -203,16 +195,16 @@
 
   <!-- خدمات -->
   <section id="services" data-aos="fade-up">
-    <h2>خدمات کافی‌نت توسن</h2>
+    <h2 style="text-align:center; color:#1d3ede;">خدمات کافی‌نت توسن</h2>
     <div class="services">
-      <div class="service-card" data-aos="zoom-in"><img src="ثبت نام های اینترنتی.png"><h3>ثبت نام‌های اینترنتی</h3></div>
+      <div class="service-card" data-aos="zoom-in"><img src="ثبت‌نام‌های اینترنتی.png"><h3>ثبت‌نام‌های اینترنتی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات دانشجویی.png"><h3>خدمات دانشجویی</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="خدمات دانش آموزی.png"><h3>خدمات دانش‌آموزی</h3></div>
+      <div class="service-card" data-aos="zoom-in"><img src="خدمات دانش‌آموزی.png"><h3>خدمات دانش‌آموزی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="اظهارنامه مالیاتی.png"><h3>اظهارنامه مالیاتی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات بیمه.png"><h3>خدمات بیمه</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات خودرو.png"><h3>خدمات خودرو</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="خدمات بورس و سهام.png"><h3>خدمات بورس و سهام</h3></div>
-      <div class="service-card" data-aos="zoom-in"><img src="پایان نامه.png"><h3>پایان‌نامه</h3></div>
+      <div class="service-card" data-aos="zoom-in"><img src="پایان‌نامه.png"><h3>پایان‌نامه</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="پروژه دانشجویی.png"><h3>پروژه دانشجویی</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="پرینت و نشر.png"><h3>پرینت و نشر</h3></div>
       <div class="service-card" data-aos="zoom-in"><img src="ثبت پروانه و شرکت.png"><h3>ثبت پروانه و شرکت</h3></div>
@@ -220,15 +212,9 @@
     </div>
   </section>
 
-  <!-- بخش ورود به ربات -->
-  <section class="bot-section" data-aos="fade-up">
-    <h2>برای انجام خدمات آنلاین وارد ربات تلگرامی ما شوید</h2>
-    <a href="https://t.me/tusan_admin" target="_blank">ورود به ربات تلگرام</a>
-  </section>
-
   <!-- تماس با ما -->
   <section id="contact" data-aos="fade-up">
-    <h2>تماس با ما</h2>
+    <h2 style="text-align:center; color:#1d3ede;">تماس با ما</h2>
     <div class="contact">
       <div class="contact-info">
         <p><strong>شماره تماس:</strong> 09390945414</p>
@@ -242,14 +228,21 @@
         </div>
       </div>
       <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6394.987911456988!2d46.25213816694788!3d37.385590860151225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b1100575b1c35%3A0xff93373bd2491d40!2z2qnYp9mB24wg2YbYqiDYqtmI2LPZhg!5e1!3m2!1sfa!2s!4v1759837645204!5m2!1sfa!2s" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6394.987911456988!2d46.25213816694788!3d37.385590860151225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b1100575b1c35%3A0xff93373bd2491d40!2z2qnYp9mB24wg2YbYqiDYqtmI2LPZhg!5e1!3m2!1sfa!2s!4v1759837645204!5m2!1sfa!2s" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </section>
 
+  <!-- بخش ربات تلگرام -->
+  <section id="bot" class="telegram-section" data-aos="fade-up">
+    <h2>ارتباط مستقیم با ربات کافی‌نت توسن</h2>
+    <p>برای انجام سریع خدمات آنلاین، وارد ربات تلگرام ما شوید.</p>
+    <a href="https://t.me/tusan_c_bot" class="telegram-button">ورود به ربات تلگرام</a>
+  </section>
+
   <!-- درباره ما -->
   <section id="about" data-aos="fade-up">
-    <h2>درباره کافی‌نت توسن</h2>
+    <h2 style="text-align:center; color:#1d3ede;">درباره کافی‌نت توسن</h2>
     <p style="text-align:center; max-width:700px; margin:auto;">
       کافی‌نت توسن با هدف ساده‌سازی امور اینترنتی و اداری برای عموم مردم، رباتی طراحی کرده که انجام خدمات آنلاین را سریع‌تر و راحت‌تر می‌سازد.
     </p>
@@ -261,9 +254,6 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000 });
-  </script>
-
+  <script>AOS.init({ duration: 1000 });</script>
 </body>
 </html>
