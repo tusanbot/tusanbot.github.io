@@ -3,157 +3,172 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ربات کافی‌نت توسن</title>
-
+  <title>کافی‌نت توسن | خدمات اینترنتی و دانشجویی</title>
+  <link rel="icon" href="logo.png" />
+  <!-- Vazir -->
+  <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo.png">
 </head>
 <body>
 
   <!-- NAV -->
-  <nav class="nav">
+  <nav class="site-nav">
     <a href="#home">خانه</a>
-    <a href="#bot">ربات</a>
     <a href="#services">خدمات</a>
     <a href="#about">درباره ما</a>
     <a href="#contact">تماس با ما</a>
+    <a href="#bot">ربات</a>
   </nav>
 
-  <!-- HEADER (with cutout notch like Websima) -->
+  <!-- HEADER -->
   <header id="home" class="site-header">
-    <!-- top decorative notch (logo sits on it) -->
-    <div class="header-notch">
-      <div class="logo-wrap">
-        <img src="logo.png" alt="لوگو توسن" class="logo">
+    <!-- notch container (logo sits visually above the header background) -->
+    <div class="header-notch" aria-hidden="true">
+      <div class="notch-shape"></div>
+      <div class="logo-holder">
+        <img src="logo.png" alt="لوگو کافی‌نت توسن" class="logo">
       </div>
     </div>
 
-    <div class="header-content">
+    <div class="header-inner">
       <h1>ربات کافی‌نت توسن</h1>
-      <p class="lead">خدمات آنلاین کافی‌نت — سریع، امن و آسان</p>
+      <p class="lead">خدمات اینترنتی و دانشجویی — سریع، امن و در دسترس</p>
     </div>
 
-    <!-- waves layers (SVG) -->
-    <div class="waves" aria-hidden="true">
-      <svg class="wave wave-layer wave-a" viewBox="0 0 1200 200" preserveAspectRatio="none">
-        <path d="M0,120 C240,200 480,20 720,120 C960,220 1200,60 1440,120 L1440,200 L0,200 Z" fill="#0e1c1b"></path>
+    <!-- Waves (three layers) -->
+    <div class="waves waves-top" aria-hidden="true">
+      <svg class="wave wave-1" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,120 C240,200 480,20 720,120 C960,220 1200,60 1440,120 L1440,200 L0,200 Z" fill="#179d99"></path>
       </svg>
-      <svg class="wave wave-layer wave-b" viewBox="0 0 1200 200" preserveAspectRatio="none">
-        <path d="M0,100 C200,160 400,40 600,100 C800,160 1000,20 1200,100 L1200,200 L0,200 Z" fill="#179d99"></path>
+      <svg class="wave wave-2" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,100 C200,160 400,40 600,100 C800,160 1000,20 1200,100 L1200,200 L0,200 Z" fill="#127b78"></path>
       </svg>
-      <svg class="wave wave-layer wave-c" viewBox="0 0 1200 200" preserveAspectRatio="none">
-        <path d="M0,130 C250,230 500,30 750,130 C1000,230 1250,80 1500,130 L1500,200 L0,200 Z" fill="rgba(23,157,153,0.6)"></path>
+      <svg class="wave wave-3" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,130 C300,230 600,30 900,130 C1200,230 1500,80 1800,130 L1800,200 L0,200 Z" fill="#0e5f5c"></path>
       </svg>
     </div>
   </header>
 
-  <!-- BOT SECTION -->
-  <section id="bot" class="bot-section">
-    <div class="bot-inner">
-      <h2>برای انجام خدمات آنلاین وارد ربات تلگرام ما شوید</h2>
-      <p>سریع‌ترین راه ثبت سفارش و پیگیری</p>
-      <div class="bot-actions">
-        <a class="btn-telegram" href="https://t.me/tusan_admin" target="_blank" rel="noopener">ورود به ربات تلگرام</a>
-      </div>
+  <!-- ABOUT (short) -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2>درباره کافی‌نت توسن</h2>
+      <p>کافی‌نت توسن با طراحی ربات تلگرامی اختصاصی، خدمات اینترنتی، اداری و دانشجویی را با کیفیت بالا به همشهریان ارائه می‌دهد.</p>
     </div>
   </section>
 
-  <!-- SERVICES (with notch-like title bar similar to Websima) -->
+  <!-- BOT (placed after about, before services as requested earlier? user wanted before footer; keep before services? 
+       You requested "معرفی ربات در انتهای صفحه قبل از فوتر" — so we'll place it later. For UX we'll keep small promo here and full section later. -->
+  <!-- small promo (optional) -->
+  <div class="promo-small">
+    <a href="https://t.me/tusan_cofeenet_bot" target="_blank" rel="noopener" class="promo-link">ورود سریع به ربات توسن</a>
+  </div>
+
+  <!-- SERVICES SECTION (with notch-like title) -->
   <section id="services" class="services-section">
     <div class="services-header">
       <div class="services-title">
         <h2>خدمات کافی‌نت توسن</h2>
       </div>
-      <div class="services-decor"></div>
+      <!-- decorative fold under the title (visual 'تاخوردگی') -->
+      <div class="services-fold" aria-hidden="true"></div>
     </div>
 
-    <div class="services-grid" id="servicesGrid">
-      <!-- service items (JS will render images fallback-aware) -->
-      <div class="service-card" data-files='["ثبت‌نام‌های اینترنتی.png","service1.png","service1.webp"]'>
-        <img alt="ثبت‌نام‌های اینترنتی" class="service-img">
+    <div class="services-grid">
+      <!-- each card uses image file names placed in root (as you said) -->
+      <div class="service-card">
+        <img src="ثبت‌نام‌های اینترنتی.png" alt="" class="service-img">
         <h3>ثبت‌نام‌های اینترنتی</h3>
       </div>
 
-      <div class="service-card" data-files='["خدمات دانشجویی.png","service2.png"]'>
-        <img alt="خدمات دانشجویی" class="service-img">
+      <div class="service-card">
+        <img src="خدمات دانشجویی.png" alt="" class="service-img">
         <h3>خدمات دانشجویی</h3>
       </div>
 
-      <div class="service-card" data-files='["خدمات دانش آموزی.png","service3.png"]'>
-        <img alt="خدمات دانش‌آموزی" class="service-img">
+      <div class="service-card">
+        <img src="خدمات دانش‌آموزی.png" alt="" class="service-img">
         <h3>خدمات دانش‌آموزی</h3>
       </div>
 
-      <div class="service-card" data-files='["اظهارنامه مالیاتی.png","service4.png"]'>
-        <img alt="اظهارنامه مالیاتی" class="service-img">
+      <div class="service-card">
+        <img src="اظهارنامه مالیاتی.png" alt="" class="service-img">
         <h3>اظهارنامه مالیاتی</h3>
       </div>
 
-      <div class="service-card" data-files='["خدمات بیمه.png","service5.png"]'>
-        <img alt="خدمات بیمه" class="service-img">
+      <div class="service-card">
+        <img src="خدمات بیمه.png" alt="" class="service-img">
         <h3>خدمات بیمه</h3>
       </div>
 
-      <div class="service-card" data-files='["خدمات خودرو.png","service6.png"]'>
-        <img alt="خدمات خودرو" class="service-img">
+      <div class="service-card">
+        <img src="خدمات خودرو.png" alt="" class="service-img">
         <h3>خدمات خودرو</h3>
       </div>
 
-      <div class="service-card" data-files='["خدمات بورس و سهام.png","service7.png"]'>
-        <img alt="خدمات بورس و سهام" class="service-img">
+      <div class="service-card">
+        <img src="خدمات بورس و سهام.png" alt="" class="service-img">
         <h3>خدمات بورس و سهام</h3>
       </div>
 
-      <div class="service-card" data-files='["پایان‌نامه.png","service8.png"]'>
-        <img alt="پایان‌نامه" class="service-img">
+      <div class="service-card">
+        <img src="پایان‌نامه.png" alt="" class="service-img">
         <h3>پایان‌نامه</h3>
       </div>
 
-      <div class="service-card" data-files='["پروژه دانشجویی.png","service9.png"]'>
-        <img alt="پروژه دانشجویی" class="service-img">
+      <div class="service-card">
+        <img src="پروژه دانشجویی.png" alt="" class="service-img">
         <h3>پروژه دانشجویی</h3>
       </div>
 
-      <div class="service-card" data-files='["پرینت و نشر.png","service10.png"]'>
-        <img alt="پرینت و نشر" class="service-img">
+      <div class="service-card">
+        <img src="پرینت و نشر.png" alt="" class="service-img">
         <h3>پرینت و نشر</h3>
       </div>
 
-      <div class="service-card" data-files='["ثبت پروانه و شرکت.png","service11.png"]'>
-        <img alt="ثبت پروانه و شرکت" class="service-img">
+      <div class="service-card">
+        <img src="ثبت پروانه و شرکت.png" alt="" class="service-img">
         <h3>ثبت پروانه و شرکت</h3>
       </div>
 
-      <div class="service-card" data-files='["وام و تسهیلات.png","service12.png"]'>
-        <img alt="وام و تسهیلات" class="service-img">
+      <div class="service-card">
+        <img src="وام و تسهیلات.png" alt="" class="service-img">
         <h3>وام و تسهیلات</h3>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="about-section">
-    <h2>درباره کافی‌نت توسن</h2>
-    <p>کافی‌نت توسن با هدف ساده‌سازی امور اینترنتی و اداری برای همشهریان، رباتی اختصاصی طراحی کرده تا بتوانید خدمات را به‌سرعت و بدون مراجعه حضوری دریافت کنید.</p>
-  </section>
+  <!-- intermediate waves between services and contact -->
+  <div class="waves middle-waves" aria-hidden="true">
+    <svg class="wave wave-1" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0,120 C240,200 480,20 720,120 C960,220 1200,60 1440,120 L1440,200 L0,200 Z" fill="#127b78" opacity="0.28"></path>
+    </svg>
+    <svg class="wave wave-2" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0,100 C200,160 400,40 600,100 C800,160 1000,20 1200,100 L1200,200 L0,200 Z" fill="#0e5f5c" opacity="0.22"></path>
+    </svg>
+    <svg class="wave wave-3" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0,130 C300,230 600,30 900,130 C1200,230 1500,80 1800,130 L1800,200 L0,200 Z" fill="#0b4b49" opacity="0.18"></path>
+    </svg>
+  </div>
 
-  <!-- CONTACT + MAP -->
+  <!-- CONTACT -->
   <section id="contact" class="contact-section">
     <div class="contact-inner">
       <div class="contact-left">
         <h2>تماس با ما</h2>
         <p class="contact-info">📞 09390945414</p>
         <p class="contact-info">📍 مراغه - خیابان ساسان (شهید مدرس) - جنب مسجد چهارده معصوم</p>
+
         <div class="social-row">
-          <a href="https://t.me/tusan_admin" target="_blank"><img alt="telegram" data-fallback='["telegram.png","images/telegram.png"]' class="social-icon"></a>
-          <a href="https://eitaa.com/mahdi_msh" target="_blank"><img alt="eitaa" data-fallback='["eitaa.png","images/eitaa.png"]' class="social-icon"></a>
-          <a href="https://rubika.ir/tusan_c" target="_blank"><img alt="rubika" data-fallback='["rubika.png","images/rubika.png"]' class="social-icon"></a>
-          <a href="https://shad.ir/tusan_cofeenet" target="_blank"><img alt="shad" data-fallback='["shad.png","images/shad.png"]' class="social-icon"></a>
-          <a href="https://wa.me/989390945414" target="_blank"><img alt="whatsapp" data-fallback='["whatsapp.png","images/whatsapp.png"]' class="social-icon"></a>
+          <a href="https://t.me/tusan_admin" target="_blank"><img src="telegram.png" alt="تلگرام" class="social-icon"></a>
+          <a href="https://eitaa.com/mahdi_msh" target="_blank"><img src="eitaa.png" alt="ایتا" class="social-icon"></a>
+          <a href="https://rubika.ir/tusan_c" target="_blank"><img src="rubika.png" alt="روبیکا" class="social-icon"></a>
+          <a href="https://shad.ir/tusan_cofeenet" target="_blank"><img src="shad.png" alt="شاد" class="social-icon"></a>
+          <a href="https://wa.me/989390945414" target="_blank"><img src="whatsapp.png" alt="واتساپ" class="social-icon"></a>
         </div>
       </div>
+
       <div class="contact-map">
-        <!-- iframe google maps — تو می‌تونی لینک دقیق را جایگزین کنی -->
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6394.987911456988!2d46.25213816694788!3d37.385590860151225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b1100575b1c35%3A0xff93373bd2491d40!2z2qnYp9mB24wg2YbYqiDYqtmI2LPZhg!5e1!3m2!1sfa!2s!4v1759837645204!5m2!1sfa!2s"
           frameborder="0" style="width:100%;height:100%;border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -161,25 +176,72 @@
     </div>
   </section>
 
-  <!-- FOOTER with waves -->
+  <!-- BOT (final section before footer) -->
+  <section id="bot" class="bot-section">
+    <div class="bot-inner">
+      <h2>ارتباط مستقیم با ربات کافی‌نت توسن</h2>
+      <p>برای انجام خدمات آنلاین و ثبت سفارش، وارد ربات تلگرام شوید.</p>
+      <a class="btn-telegram" href="https://t.me/tusan_cofeenet_bot" target="_blank" rel="noopener">ورود به ربات تلگرام</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-inner">
+    <div class="footer-top">
       <p>© 2025 کافی‌نت توسن — طراحی و توسعه</p>
     </div>
 
-    <div class="waves-footer" aria-hidden="true">
-      <svg class="wave wave-layer wave-a" viewBox="0 0 1200 200" preserveAspectRatio="none">
+    <div class="waves waves-footer" aria-hidden="true">
+      <svg class="wave wave-1" viewBox="0 0 1200 200" preserveAspectRatio="none">
         <path d="M0,100 C240,0 480,200 720,120 C960,40 1200,160 1440,100 L1440,0 L0,0 Z" fill="#0e1c1b"></path>
       </svg>
-      <svg class="wave wave-layer wave-b" viewBox="0 0 1200 200" preserveAspectRatio="none">
-        <path d="M0,120 C300,40 600,220 900,120 C1200,20 1500,160 1800,120 L1800,0 L0,0 Z" fill="#179d99" opacity="0.9"></path>
+      <svg class="wave wave-2" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,120 C300,40 600,220 900,120 C1200,20 1500,160 1800,120 L1800,0 L0,0 Z" fill="#127b78" opacity="0.95"></path>
       </svg>
-      <svg class="wave wave-layer wave-c" viewBox="0 0 1200 200" preserveAspectRatio="none">
-        <path d="M0,140 C250,60 500,240 750,140 C1000,40 1250,180 1500,140 L1500,0 L0,0 Z" fill="rgba(23,157,153,0.55)"></path>
+      <svg class="wave wave-3" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,140 C250,60 500,240 750,140 C1000,40 1250,180 1500,140 L1500,0 L0,0 Z" fill="#0e5f5c" opacity="0.7"></path>
       </svg>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- small inline script for parallax vertical shift (lightweight) -->
+  <script>
+    (function(){
+      // Always let CSS handle horizontal looping (alternate). Here we add light vertical parallax on scroll.
+      const topWaves = document.querySelectorAll('.waves-top .wave, .waves-top .wave-layer');
+      const middleWaves = document.querySelectorAll('.middle-waves .wave');
+      const footerWaves = document.querySelectorAll('.waves-footer .wave');
+
+      // set different horizontal animation speeds & directions (CSS also does alternate)
+      document.querySelectorAll('.wave').forEach((el, idx)=>{
+        const base = 8 + Math.random()*8;
+        el.style.animation = `slideX ${base + idx*2}s linear infinite alternate`;
+        // give slight opacity if not set
+        el.style.opacity = el.style.opacity || 1;
+      });
+
+      // parallax vertical on scroll
+      function onScroll(){
+        const y = window.scrollY || window.pageYOffset;
+        const h = window.innerHeight;
+        const factor = Math.min(y / (h*1.5), 1);
+        document.querySelectorAll('.waves .wave').forEach((el, i)=>{
+          const depth = (i % 3) * 8 + 4; // different depths for layers
+          el.style.transform = `translate3d(0, ${-factor*depth}px, 0)`;
+        });
+      }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+
+      // Define slideX keyframes dynamically so they work across browsers
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes slideX {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-40%); }
+        }`;
+      document.head.appendChild(style);
+    })();
+  </script>
 </body>
 </html>
