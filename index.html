@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>کافی‌نت توسن | خدمات اینترنتی و دانشجویی</title>
+    <link rel="icon" href="Tusan-Logo.png" /> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2DD4BF; /* Teal 400 - Neon Accent */
+            --color-secondary: #0F172A; /* Slate 900 - Sections */
+            --color-dark: #020617; /* Slate 950 - Deep Background */
+            --color-text: #F8FAFC; 
+        }
+        body {
+            font-family: 'Vazir', sans-serif;
+            background-color: var(--color-dark);
+            color: var(--color-text);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- Scroll Reveal --- */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Logo Animation --- */
+        @keyframes logo-enter {
+            0% { opacity: 0; transform: translateY(-30px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .logo-animate {
+            animation: logo-enter 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* --- Wave Animation --- */
+        @keyframes wave-slide {
+            0% { transform: translateX(0) translateZ(0) scaleY(1); }
+            50% { transform: translateX(-25%) translateZ(0) scaleY(0.8); }
+            100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
+        }
+        .wave-parallax > use {
+            animation: wave-slide 25s linear infinite;
+        }
+        .wave-parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 17s; opacity: 0.7; }
+        .wave-parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 20s; opacity: 0.5; }
+        .wave-parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 23s; opacity: 0.3; }
+        .wave-parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 30s; }
+
+        /* --- UI Elements --- */
+        .hero-title { text-shadow: 0 0 20px rgba(45, 212, 191, 0.3); }
+        
+        .service-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 1px solid rgba(45, 212, 191, 0.1);
+            transition: all 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(45, 212, 191, 0.3);
+            border-color: var(--color-primary);
+        }
+
+        .cta-btn {
+            background: linear-gradient(90deg, #14b8a6, #2dd4bf);
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
+        }
+        .cta-btn:hover {
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* List Styling */
+        #outputOutline ol, #outputText ol, #letterOutput ol, #ideasOutput ol, #quizOutput ol { padding-right: 1.5rem; } 
+        #outputOutline li, #outputText li, #letterOutput li, #ideasOutput li, #quizOutput li { list-style-type: none; counter-increment: list-item; margin-bottom: 0.5rem; position: relative; }
+        #outputOutline li::before, #outputText li::before, #letterOutput li::before, #ideasOutput li::before, #quizOutput li::before {
+            content: counter(list-item) ". "; 
+            color: var(--color-primary);
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Modal -->
+    <div id="serviceModal" class="fixed inset-0 bg-black/95 backdrop-blur-sm flex justify-center items-center z-[60] hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-slate-900 p-8 rounded-2xl max-w-lg w-[90%] shadow-2xl border border-teal-500/50 transform scale-95 transition-all duration-300 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-teal-500/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+            <h3 id="modalTitle" class="text-2xl font-bold pb-4 mb-4 text-teal-300 border-b border-teal-800/50 relative z-10"></h3>
+            <p id="modalDescription" class="text-gray-300 leading-loose text-lg relative z-10"></p>
+            <button onclick="closeModal()" class="mt-8 w-full py-3 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-500 transition-all shadow-lg shadow-teal-900/50">بستن</button>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-slate-950/80 backdrop-blur-md border-b border-teal-900/30">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center shadow-lg shadow-teal-500/20">
+                    <img src="Tusan-Logo.png" alt="Tusan" class="w-9 h-9 rounded-full object-cover">
+                </div>
+                <span class="text-xl font-black text-white tracking-tight hidden sm:block">توسن</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-gray-300 font-medium">
+                <a href="#home" class="hover:text-teal-400 transition-colors">خانه</a>
+                <a href="#services" class="hover:text-teal-400 transition-colors">خدمات</a>
+                <button onclick="showAiTools()" class="hover:text-teal-400 transition-colors flex items-center gap-1">
+                    <span>ابزارهای هوشمند</span>
+                    <span class="bg-teal-500/20 text-teal-300 text-[10px] px-1.5 py-0.5 rounded-full">AI</span>
+                </button>
+                <a href="#contact" class="hover:text-teal-400 transition-colors">تماس</a>
+            </div>
+            <!-- Mobile Menu Button (Simple) -->
+             <button onclick="showAiTools()" class="md:hidden text-teal-400 font-bold text-sm border border-teal-500/30 px-3 py-1.5 rounded-lg">
+                ابزارهای AI
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Animated Waves -->
+    <header id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center pt-20 pb-32 overflow-hidden bg-[#020617]">
+        
+        <!-- Background Glows -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-600/10 rounded-full blur-[100px] animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px]"></div>
+
+        <div class="container mx-auto px-4 z-10 logo-animate opacity-0">
+            <div class="mb-8 relative inline-block">
+                <div class="absolute inset-0 bg-teal-400 rounded-full blur-xl opacity-20"></div>
+                <img src="Tusan-Logo.png" class="w-32 h-32 rounded-full border-2 border-teal-500/30 shadow-2xl relative z-10 mx-auto" alt="Logo">
+            </div>
+            
+            <h1 class="hero-title text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+                کافی‌نت <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-blue-400">توسن</span><br>
+                <span class="text-2xl md:text-4xl font-bold text-gray-400 mt-2 block">ترکیب تجربه و هوش مصنوعی</span>
+            </h1>
+            
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                انجام کلیه خدمات اینترنتی، دانشجویی و اداری با بالاترین سرعت و دقت. 
+                دستیار هوشمند ما کارهای پیچیده را برای شما ساده می‌کند.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#services" class="px-8 py-4 bg-slate-800 text-white font-bold rounded-xl border border-slate-700 hover:bg-slate-700 transition-all">
+                    مشاهده خدمات
+                </a>
+                <button onclick="showAiTools()" class="cta-btn px-8 py-4 text-slate-900 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    ابزارهای هوشمند (AI)
+                </button>
+            </div>
+        </div>
+
+        <!-- Animated Waves at Bottom of Header -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform translate-y-[1px]">
+            <svg class="relative block w-[calc(100%+1.3px)] h-[100px] md:h-[150px]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="wave-parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(15, 23, 42, 0.7)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(15, 23, 42, 0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(15, 23, 42, 0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#0F172A" /> <!-- Matches next section bg -->
+                </g>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-slate-900 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-teal-400 font-bold tracking-widest text-sm uppercase">خدمات ما</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-2">پکیج کامل خدمات دیجیتال</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Service Card 1 -->
+                <div onclick="showServiceDetails('ثبت‌نام‌های اینترنتی', 'انجام کلیه ثبت‌نام‌های حساس شامل کنکور سراسری و ارشد، آزمون‌های استخدامی، سامانه سخا و تعویض پلاک.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal">
+                    <div class="w-12 h-12 rounded-lg bg-teal-500/10 flex items-center justify-center mb-4 text-teal-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-4 2h4M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">ثبت‌نام‌های اینترنتی</h3>
+                    <p class="text-gray-400 text-sm">کنکور، خودرو، مسکن و استخدامی</p>
+                </div>
+                <!-- Service Card 2 -->
+                <div onclick="showServiceDetails('خدمات دانشجویی', 'صفر تا صد امور دانشگاهی: انتخاب واحد، حذف و اضافه، دریافت کارت ورود به جلسه، پروپوزال و امور فارغ‌التحصیلی.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 text-blue-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">خدمات دانشجویی</h3>
+                    <p class="text-gray-400 text-sm">انتخاب واحد و پرتال دانشگاهی</p>
+                </div>
+                <!-- Service Card 3 -->
+                <div onclick="showServiceDetails('پایان‌نامه و تحقیق', 'مشاوره، ویرایش و قالب‌بندی پایان‌نامه، سمینار و مقالات علمی با رعایت استانداردهای دانشگاهی.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4 text-purple-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">پایان‌نامه و تحقیق</h3>
+                    <p class="text-gray-400 text-sm">ویرایش، نگارش و پاورپوینت</p>
+                </div>
+                <!-- Service Card 4 -->
+                <div onclick="showServiceDetails('تایپ و ترجمه', 'تایپ فوری متون فارسی و انگلیسی، فرمول‌نویسی، و ترجمه متون تخصصی توسط مترجمین مجرب.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="w-12 h-12 rounded-lg bg-yellow-500/10 flex items-center justify-center mb-4 text-yellow-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">تایپ و ترجمه</h3>
+                    <p class="text-gray-400 text-sm">تایپ، ویرایش و ترجمه تخصصی</p>
+                </div>
+                <!-- Service Card 5 -->
+                <div onclick="showServiceDetails('خدمات بانکی و مالی', 'انجام امور اینترنتی بانکی، پرداخت اقساط، مالیات بر ارزش افزوده، اظهارنامه مالیاتی و فیش حقوقی.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.4s;">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 text-green-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">امور مالی و مالیاتی</h3>
+                    <p class="text-gray-400 text-sm">اظهارنامه، فیش حقوقی و بیمه</p>
+                </div>
+                <!-- Service Card 6 -->
+                <div onclick="showServiceDetails('چاپ و تکثیر', 'پرینت لیزری سیاه و سفید و رنگی با کیفیت بالا، کپی، اسکن و صحافی فنری و گالینگور.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.5s;">
+                    <div class="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-4 text-red-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">چاپ و تکثیر</h3>
+                    <p class="text-gray-400 text-sm">پرینت، اسکن و صحافی</p>
+                </div>
+                <!-- Service Card 7 -->
+                <div onclick="showServiceDetails('خدمات اداری', 'انجام کلیه امور اداری آنلاین، ثبت نام ثنا، سامانه ابلاغ، دریافت گواهی عدم سوء پیشینه و سوابق بیمه.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.6s;">
+                    <div class="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4 text-orange-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">خدمات اداری</h3>
+                    <p class="text-gray-400 text-sm">ثنا، بیمه و خدمات قضایی</p>
+                </div>
+                <!-- Service Card 8 -->
+                <div onclick="showServiceDetails('ایمیل و اکانت', 'ساخت ایمیل معتبر، بازیابی رمز عبور، ساخت اپل آیدی و اکانت‌های کاربری در سایت‌های مختلف.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.7s;">
+                    <div class="w-12 h-12 rounded-lg bg-pink-500/10 flex items-center justify-center mb-4 text-pink-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">ایمیل و اکانت</h3>
+                    <p class="text-gray-400 text-sm">ساخت و بازیابی حساب کاربری</p>
+                </div>
+                 <!-- Service Card 9 -->
+                <div onclick="showServiceDetails('طراحی و گرافیک', 'طراحی کارت ویزیت، لوگو، بنر، تراکت و ویرایش تصاویر با فتوشاپ.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.8s;">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-4 text-cyan-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">طراحی و گرافیک</h3>
+                    <p class="text-gray-400 text-sm">فتوشاپ، طراحی بنر و کارت</p>
+                </div>
+                 <!-- Service Card 10 -->
+                 <div onclick="showServiceDetails('بیمه و تامین اجتماعی', 'ارسال لیست بیمه کارفرمایان، دریافت فیش حق بیمه، سابقه بیمه و ثبت نام بیمه بیکاری.')" class="service-card p-6 rounded-2xl cursor-pointer scroll-reveal" style="transition-delay: 0.9s;">
+                    <div class="w-12 h-12 rounded-lg bg-lime-500/10 flex items-center justify-center mb-4 text-lime-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                    <h3 class="text-xl font-bold text-white mb-2">بیمه و تامین اجتماعی</h3>
+                    <p class="text-gray-400 text-sm">لیست بیمه و سوابق</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tools Section (Hidden by default) -->
+    <section id="bot" class="py-24 bg-[#0F172A] border-t border-teal-900/30 hidden relative">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#2dd4bf_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="bg-teal-500/10 text-teal-400 px-4 py-1 rounded-full text-sm font-bold border border-teal-500/20">هوش مصنوعی (Gemini)</span>
+                <h2 class="text-4xl font-extrabold text-white mt-6">جعبه ابزار هوشمند شما</h2>
+                <p class="text-gray-400 mt-4">ابزارهای قدرتمند برای تسریع کارهای تحقیقاتی و اداری</p>
+                <p class="text-gray-400 mt-4">.توجه: برای دسترسی به برخی ابزار های هوش مصنوعی نیاز به ابزار های تغییر آی پی دارید</p>
+            </div>
+
+            <div class="grid gap-12 max-w-4xl mx-auto">
+                <!-- AI Tool 1: Text Assistant -->
+                <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-2xl">📝</span> دستیار متن و مقاله
+                    </h3>
+                    <textarea id="textInput" class="w-full h-32 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 transition-colors mb-4" placeholder="متن خود را اینجا وارد کنید..."></textarea>
+                    <div class="flex gap-3 flex-wrap">
+                        <button id="summarizeBtn" onclick="processText('summarize')" class="flex-1 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-500 transition font-bold">خلاصه‌سازی</button>
+                        <button id="improveBtn" onclick="processText('improve')" class="flex-1 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition font-bold">بهبود نگارش</button>
+                    </div>
+                    <div id="loadingIndicatorText" class="hidden mt-4 text-center text-teal-400">در حال پردازش...</div>
+                    <div id="outputContainerText" class="hidden mt-6 p-4 bg-slate-800 rounded-lg border-r-4 border-teal-500 text-gray-200">
+                        <h4 id="outputTitleText" class="font-bold mb-2 text-white"></h4>
+                        <div id="outputTextContent" class="leading-relaxed"></div>
+                    </div>
+                </div>
+
+                <!-- AI Tool 2: Research Ideas -->
+                <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-2xl">💡</span> ایده‌پرداز تحقیق
+                    </h3>
+                    <div class="flex gap-3">
+                        <input id="fieldInput" type="text" class="flex-1 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500" placeholder="رشته تحصیلی (مثلاً: مهندسی کامپیوتر)">
+                        <button onclick="generateIdeas()" class="px-8 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold">پیشنهاد</button>
+                    </div>
+                    <div id="loadingIndicatorIdeas" class="hidden mt-4 text-center text-teal-400">در حال جستجو...</div>
+                    <div id="outputContainerIdeas" class="hidden mt-6 text-gray-200 leading-loose">
+                        <div id="ideasOutput"></div>
+                    </div>
+                </div>
+
+                <!-- AI Tool 3: Quiz Generator -->
+                <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-2xl">🧠</span> آزمون‌ساز هوشمند
+                    </h3>
+                    <div class="flex gap-3">
+                        <input id="quizInput" type="text" class="flex-1 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500" placeholder="مبحث (مثلاً: تاریخ هخامنشیان)">
+                        <button onclick="generateQuiz()" class="px-8 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold">طراحی سوال</button>
+                    </div>
+                    <div id="loadingIndicatorQuiz" class="hidden mt-4 text-center text-teal-400">در حال طراحی سوالات...</div>
+                    <div id="outputContainerQuiz" class="hidden mt-6 p-4 bg-slate-800 rounded-lg text-gray-200 whitespace-pre-wrap leading-loose border-r-4 border-purple-500">
+                        <div id="quizOutput"></div>
+                    </div>
+                </div>
+
+                 <!-- AI Tool 4: Translator -->
+                 <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-2xl">🌐</span> مترجم تخصصی
+                    </h3>
+                    <textarea id="translateInput" class="w-full h-24 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 mb-4" placeholder="متن را وارد کنید..."></textarea>
+                    <div class="flex gap-3">
+                        <button onclick="translateText('en')" class="flex-1 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition">ترجمه به انگلیسی</button>
+                        <button onclick="translateText('fa')" class="flex-1 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition">ترجمه به فارسی</button>
+                    </div>
+                    <div id="loadingIndicatorTrans" class="hidden mt-4 text-center text-teal-400">در حال ترجمه...</div>
+                    <div id="outputContainerTrans" class="hidden mt-6 p-4 bg-slate-800 rounded-lg text-gray-200" dir="auto">
+                        <div id="transOutput"></div>
+                        <button onclick="copyToClipboard('transOutput')" class="text-teal-400 text-sm mt-2 hover:underline">کپی ترجمه</button>
+                    </div>
+                </div>
+
+                <!-- AI Tool 5: Letter Writer (Restored) -->
+                <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-2xl"✍️</span> دستیار نگارش نامه اداری
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <input id="letterRecipient" type="text" class="p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500" placeholder="گیرنده (مثلاً: ریاست محترم بانک)">
+                        <input id="letterSubject" type="text" class="p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500" placeholder="موضوع (مثلاً: درخواست وام)">
+                    </div>
+                    <textarea id="letterPoints" class="w-full h-24 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 mb-4" placeholder="نکات کلیدی..."></textarea>
+                    <button onclick="generateLetter()" class="w-full py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold">تولید نامه رسمی</button>
+                    <div id="loadingIndicatorLetter" class="hidden mt-4 text-center text-teal-400">در حال نگارش...</div>
+                    <div id="outputContainerLetter" class="hidden mt-6 p-4 bg-slate-800 rounded-lg border-r-4 border-teal-500 text-gray-200 whitespace-pre-wrap font-serif">
+                        <div id="letterOutput"></div>
+                        <button onclick="copyToClipboard('letterOutput')" class="text-teal-400 text-sm mt-4 hover:underline">کپی متن</button>
+                    </div>
+                </div>
+
+                <!-- AI Tool 6: Outline Generator (Restored) -->
+                <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-2xl">📑</span> تولیدکننده سرفصل مقاله
+                    </h3>
+                    <div class="flex gap-3">
+                        <input id="topicInput" type="text" class="flex-1 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500" placeholder="موضوع مقاله...">
+                        <button onclick="generateOutline()" class="px-8 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold">تولید سرفصل</button>
+                    </div>
+                    <div id="loadingIndicatorOutline" class="hidden mt-4 text-center text-teal-400">در حال ساختاردهی...</div>
+                    <div id="outputContainerOutline" class="hidden mt-6 p-4 bg-slate-800 rounded-lg border-r-4 border-teal-500 text-gray-200">
+                        <h4 id="outputTitleOutline" class="font-bold mb-2 text-white text-lg"></h4>
+                        <div id="outputOutline"></div>
+                    </div>
+                </div>
+
+                 <!-- AI Tool 7: TTS (Restored) -->
+                 <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-2xl">🔊</span> تبدیل متن به گفتار
+                    </h3>
+                    <textarea id="ttsInput" class="w-full h-24 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 mb-4" placeholder="متن را وارد کنید..."></textarea>
+                    <button id="ttsBtn" onclick="generateTTS()" class="w-full py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold">تولید فایل صوتی</button>
+                    <div id="loadingIndicatorTTS" class="hidden mt-4 text-center text-teal-400">در حال تولید صدا...</div>
+                    <div id="ttsOutputContainer" class="hidden mt-6 p-4 bg-slate-800 rounded-lg border-r-4 border-teal-500">
+                        <h4 id="outputTitleTTS" class="font-bold mb-2 text-white">فایل صوتی آماده:</h4>
+                        <audio id="audioPlayer" controls class="w-full rounded-lg"></audio>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section with Map -->
+    <section id="contact" class="py-24 bg-[#020617] relative border-t border-teal-900/30">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-reveal">
+                    <span class="text-teal-400 font-bold tracking-widest text-sm">ارتباط با ما</span>
+                    <h2 class="text-4xl font-bold text-white mt-2 mb-8">ما را پیدا کنید</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4 text-gray-300">
+                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-teal-400 shrink-0">📍</div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">آدرس</h4>
+                                <p>مراغه، خیابان ساسان (شهید مدرس)، جنب مسجد چهارده معصوم</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 text-gray-300">
+                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-teal-400 shrink-0">📞</div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">تلفن</h4>
+                                <p>09390945414</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 p-6 bg-slate-900 rounded-2xl border border-slate-800">
+                            <p class="text-gray-400 text-sm mb-4">برای ثبت سفارش سریع و آنلاین:</p>
+                            <a href="https://t.me/tusan_cofeenet_bot" target="_blank" class="block w-full py-3 bg-blue-600 hover:bg-blue-500 text-white text-center rounded-xl font-bold transition shadow-lg shadow-blue-900/50">
+                                ربات تلگرام توسن
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-96 bg-slate-800 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl scroll-reveal">
+                     <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6394.987911456988!2d46.25213816694788!3d37.385590860151225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b1100575b1c35%3A0xff93373bd2491d40!2z2qnYp9mB24wg2YbYqiDYqtmI2LPZhg!5e1!3m2!1sfa!2s!4v1759837645204!5m2!1sfa!2s"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with Top Waves -->
+    <footer class="relative bg-slate-900 pt-32 pb-8 mt-auto">
+        <!-- Top Wave Divider -->
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180">
+            <svg class="relative block w-[calc(100%+1.3px)] h-[60px]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="wave-parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(2, 6, 23, 0.7)" /> <!-- Matches body bg dark -->
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(2, 6, 23, 0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(2, 6, 23, 0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#020617" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-700">
+                <img src="Tusan-Logo.png" class="w-8 h-8 rounded-full">
+            </div>
+            <p class="text-gray-500 text-sm">© 2025 کافی‌نت توسن. تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- UI Logic ---
+        function showAiTools() {
+            const section = document.getElementById('bot');
+            section.classList.remove('hidden');
+            setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('serviceModal');
+        function showServiceDetails(title, desc) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = desc;
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 50) el.classList.add('visible');
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Trigger once on load
+
+        // --- Gemini API ---
+        const API_KEY = "AIzaSyDm9b4CChy8_n-AvR_VIS_8Ppw6xOL6VP8"; // Injected by environment
+        const MODEL_TEXT = "gemini-2.5-flash-preview-09-2025";
+        const TTS_MODEL = "gemini-2.5-flash-preview-tts";
+
+        async function callGemini(payload) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_TEXT}:generateContent?key=${API_KEY}`;
+            try {
+                const response = await fetch(url, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(response.status);
+                const data = await response.json();
+                
+                if (payload.generationConfig?.responseMimeType === "application/json") {
+                     return JSON.parse(data.candidates[0].content.parts[0].text);
+                }
+                return data.candidates[0].content.parts[0].text;
+            } catch (e) {
+                console.error(e);
+                return "خطا در ارتباط با سرور. لطفا مجدد تلاش کنید.";
+            }
+        }
+
+        // Text Assistant
+        async function processText(type) {
+            const text = document.getElementById('textInput').value;
+            if(text.length < 10) return alert("متن کوتاه است");
+            
+            const loading = document.getElementById('loadingIndicatorText');
+            const output = document.getElementById('outputContainerText');
+            const content = document.getElementById('outputTextContent');
+            const title = document.getElementById('outputTitleText');
+            
+            loading.classList.remove('hidden'); output.classList.add('hidden');
+            
+            const prompt = type === 'summarize' ? "Summarize this Persian text:" : "Improve this Persian text academically:";
+            const result = await callGemini({ contents: [{ parts: [{ text: prompt + "\n" + text }] }] });
+            
+            loading.classList.add('hidden');
+            output.classList.remove('hidden');
+            title.textContent = type === 'summarize' ? "خلاصه متن" : "متن بهبود یافته";
+            content.innerText = result;
+        }
+
+        // Idea Generator
+        async function generateIdeas() {
+            const field = document.getElementById('fieldInput').value;
+            if(!field) return alert("رشته را وارد کنید");
+            
+            document.getElementById('loadingIndicatorIdeas').classList.remove('hidden');
+            document.getElementById('outputContainerIdeas').classList.add('hidden');
+            
+            const result = await callGemini({ contents: [{ parts: [{ text: `Give 5 novel research ideas for a student in: ${field}. Response in Persian list.` }] }] });
+            
+            document.getElementById('loadingIndicatorIdeas').classList.add('hidden');
+            document.getElementById('outputContainerIdeas').classList.remove('hidden');
+            document.getElementById('ideasOutput').innerText = result;
+        }
+
+        // Quiz Generator
+        async function generateQuiz() {
+            const topic = document.getElementById('quizInput').value;
+            if(!topic) return alert("مبحث را وارد کنید");
+            
+            document.getElementById('loadingIndicatorQuiz').classList.remove('hidden');
+            document.getElementById('outputContainerQuiz').classList.add('hidden');
+            
+            const result = await callGemini({ contents: [{ parts: [{ text: `Create a short Persian quiz (3 MCQs) about: ${topic} with answers at the end.` }] }] });
+            
+            document.getElementById('loadingIndicatorQuiz').classList.add('hidden');
+            document.getElementById('outputContainerQuiz').classList.remove('hidden');
+            document.getElementById('quizOutput').innerText = result;
+        }
+
+        // Translator
+        async function translateText(lang) {
+            const text = document.getElementById('translateInput').value;
+            if(!text) return alert("متن را وارد کنید");
+            
+            document.getElementById('loadingIndicatorTrans').classList.remove('hidden');
+            document.getElementById('outputContainerTrans').classList.add('hidden');
+            
+            const target = lang === 'en' ? "English" : "Persian";
+            const result = await callGemini({ contents: [{ parts: [{ text: `Translate this to academic ${target}: ${text}` }] }] });
+            
+            document.getElementById('loadingIndicatorTrans').classList.add('hidden');
+            document.getElementById('outputContainerTrans').classList.remove('hidden');
+            document.getElementById('transOutput').innerText = result;
+        }
+
+        // Letter Generator (Restored)
+        async function generateLetter() {
+            const r = document.getElementById('letterRecipient').value;
+            const s = document.getElementById('letterSubject').value;
+            const p = document.getElementById('letterPoints').value;
+            if(r.length < 2 || s.length < 2) return alert("اطلاعات را کامل کنید");
+
+            document.getElementById('loadingIndicatorLetter').classList.remove('hidden');
+            document.getElementById('outputContainerLetter').classList.add('hidden');
+
+            const prompt = `Write a formal Persian administrative letter. Recipient: ${r}, Subject: ${s}, Key Points: ${p}`;
+            const result = await callGemini({ contents: [{ parts: [{ text: prompt }] }] });
+
+            document.getElementById('loadingIndicatorLetter').classList.add('hidden');
+            document.getElementById('outputContainerLetter').classList.remove('hidden');
+            document.getElementById('letterOutput').innerText = result;
+        }
+
+        // Outline Generator (Restored)
+        const OUTLINE_SCHEMA = {
+            type: "OBJECT",
+            properties: {
+                title: { type: "STRING" },
+                sections: { type: "ARRAY", items: { type: "OBJECT", properties: { sectionTitle: { type: "STRING" }, points: { type: "ARRAY", items: { type: "STRING" } } } } }
+            }
+        };
+
+        async function generateOutline() {
+            const t = document.getElementById('topicInput').value;
+            if(t.length < 5) return alert("موضوع کوتاه است");
+
+            document.getElementById('loadingIndicatorOutline').classList.remove('hidden');
+            document.getElementById('outputContainerOutline').classList.add('hidden');
+
+            const result = await callGemini({ 
+                contents: [{ parts: [{ text: t }] }],
+                systemInstruction: { parts: [{ text: "Generate a structured academic outline in Persian (JSON format)." }] },
+                generationConfig: { responseMimeType: "application/json", responseSchema: OUTLINE_SCHEMA }
+            });
+
+            document.getElementById('loadingIndicatorOutline').classList.add('hidden');
+            document.getElementById('outputContainerOutline').classList.remove('hidden');
+
+            if (result && result.title) {
+                document.getElementById('outputTitleOutline').textContent = result.title;
+                let html = '<ol class="mt-4">';
+                result.sections.forEach(s => {
+                    html += `<li class="mb-4"><strong class="text-teal-300 text-xl block mb-1">${s.sectionTitle}</strong><ul class="list-disc list-inside text-gray-300 border-r-2 border-teal-700 pr-4 mt-2">${s.points.map(p=>`<li>${p}</li>`).join('')}</ul></li>`;
+                });
+                document.getElementById('outputOutline').innerHTML = html + '</ol>';
+            }
+        }
+
+        // TTS (Restored)
+        function base64ToArrayBuffer(base64) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
+            return bytes.buffer;
+        }
+        function pcmToWav(pcm16Data, sampleRate) {
+             const buffer = new ArrayBuffer(44 + pcm16Data.byteLength);
+             const view = new DataView(buffer);
+             const writeString = (view, offset, string) => { for (let i = 0; i < string.length; i++) view.setUint8(offset + i, string.charCodeAt(i)); };
+             writeString(view, 0, 'RIFF'); view.setUint32(4, 36 + pcm16Data.byteLength, true); writeString(view, 8, 'WAVE');
+             writeString(view, 12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
+             view.setUint32(24, sampleRate, true); view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true);
+             writeString(view, 36, 'data'); view.setUint32(40, pcm16Data.byteLength, true);
+             const pcm8 = new Uint8Array(pcm16Data.buffer);
+             for (let i = 0; i < pcm16Data.byteLength; i++) view.setUint8(44 + i, pcm8[i]);
+             return new Blob([buffer], { type: 'audio/wav' });
+        }
+        let currentAudioUrl = null;
+
+        async function generateTTS() {
+            const t = document.getElementById('ttsInput').value;
+            if(t.length < 5) return alert("متن کوتاه است");
+            
+            document.getElementById('ttsBtn').disabled = true;
+            document.getElementById('loadingIndicatorTTS').classList.remove('hidden');
+            document.getElementById('ttsOutputContainer').classList.add('hidden');
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TTS_MODEL}:generateContent?key=${API_KEY}`;
+            const payload = { 
+                contents: [{ parts: [{ text: `Say in Persian: ${t}` }] }], 
+                generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } } } 
+            };
+
+            try {
+                const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const json = await res.json();
+                const audioData = json.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+                if (audioData) {
+                    if (currentAudioUrl) URL.revokeObjectURL(currentAudioUrl);
+                    const wav = pcmToWav(new Int16Array(base64ToArrayBuffer(audioData)), 24000);
+                    currentAudioUrl = URL.createObjectURL(wav);
+                    document.getElementById('audioPlayer').src = currentAudioUrl;
+                    document.getElementById('ttsOutputContainer').classList.remove('hidden');
+                }
+            } catch (e) { console.error(e); alert("خطا در تولید صدا"); }
+            
+            document.getElementById('loadingIndicatorTTS').classList.add('hidden');
+            document.getElementById('ttsBtn').disabled = false;
+        }
+
+        function copyToClipboard(id) {
+            navigator.clipboard.writeText(document.getElementById(id).innerText);
+            alert("کپی شد!");
+        }
+    </script>
+</body>
+</html>
