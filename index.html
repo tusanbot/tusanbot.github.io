@@ -361,10 +361,6 @@
                         <div id="outputOutline"></div>
                     </div>
                 </div>
-
-                 <!-- AI Tool 7: TTS (Restored) -->
-                </div>
-
                 <!-- Tool: TTS with Multiple Voices -->
             <div class="grid gap-12 max-w-4xl mx-auto">
                 <!-- TTS Tool -->
@@ -402,7 +398,7 @@
                             <h4 class="font-bold text-white">خروجی صوتی:</h4>
                             <button onclick="document.getElementById('audioPlayer').play()" class="text-xs text-teal-400 hover:text-teal-300">پخش مجدد</button>
                         </div>
-                        <audio id="audioPlayer" controls class="w-full rounded-lg h-10"></audio>
+                        <audio id="audioPlayer1" controls class="w-full rounded-lg h-10"></audio>
                     </div>
                 </div>
 
@@ -695,6 +691,7 @@
                     const wav = pcmToWav(new Int16Array(base64ToArrayBuffer(audioData)), 24000);
                     currentAudioUrl = URL.createObjectURL(wav);
                     document.getElementById('audioPlayer').src = currentAudioUrl;
+                    document.getElementById('audioPlayer1').src = currentAudioUrl;
                     document.getElementById('ttsOutputContainer').classList.remove('hidden');
                 }
             } catch (e) { console.error(e); alert("خطا در تولید صدا"); }
@@ -750,4 +747,5 @@
 </body>
 
 </html>
+
 
