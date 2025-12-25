@@ -366,23 +366,27 @@
                 </div>
 
                 <!-- Tool: TTS with Multiple Voices -->
-                <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
-                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                        <span class="text-2xl">🔊</span> تبدیل متن به گفتار (چند صدا)
-                    </h3>
-                    <textarea id="ttsInput" class="w-full h-24 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 mb-4" placeholder="متن را برای تبدیل به صدا وارد کنید..."></textarea>
+            <div class="grid gap-12 max-w-4xl mx-auto">
+                <!-- TTS Tool -->
+                <div class="bg-slate-900 p-8 rounded-2xl border border-teal-500/30 shadow-xl">
+                    <h3 class="text-2xl font-bold text-white mb-6">🔊 تبدیل متن به گفتار (TTS)</h3>
+                    <textarea id="ttsInput" class="w-full h-32 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white mb-4 focus:border-teal-500 outline-none transition-all" placeholder="یک جمله فارسی یا انگلیسی بنویسید تا آن را برایتان بخوانم..."></textarea>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label class="text-xs text-teal-400 mb-1 block mr-2">انتخاب صدا:</label>
-                            <select id="voiceSelect" class="w-full p-3 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 outline-none">
-                                <option value="Kore">زن (Kore) - مهربان و رسمی</option>
-                                <option value="Puck">مرد/پسر (Puck) - جوان و پرانرژی</option>
-                                <option value="Charon">مرد (Charon) - عمیق و جدی</option>
-                                <option value="Fenrir">مرد (Fenrir) - قدرتمند</option>
-                                <option value="Aoede">زن (Aoede) - آرام و دلنشین</option>
-                            </select>
-                        </div>
+                        <select id="voiceSelect" class="p-3 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                            <option value="Kore">صدای زن (Kore)</option>
+                            <option value="Puck">صدای مرد (Puck)</option>
+                            <option value="Charon">صدای عمیق (Charon)</option>
+                            <option value="Fenrir">صدای کلاسیک (Fenrir)</option>
+                        </select>
+                        <button id="ttsBtn" onclick="generateTTS()" class="py-3 bg-teal-600 text-white rounded-xl font-bold hover:bg-teal-500 transition-all">تولید و پخش صدا</button>
+                    </div>
+
+                    <div id="loadingTTS" class="hidden text-teal-400 text-center animate-pulse">در حال پردازش سیگنال‌های صوتی...</div>
+                    <div id="ttsOutput" class="hidden mt-6 p-4 bg-slate-800 rounded-lg">
+                        <audio id="audioPlayer" controls class="w-full"></audio>
+                    </div>
+                </div>
                         <div class="flex items-end">
                             <button id="ttsBtn" onclick="generateTTS()" class="w-full py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold shadow-lg shadow-teal-900/40">تولید فایل صوتی</button>
                         </div>
@@ -703,7 +707,47 @@
             navigator.clipboard.writeText(document.getElementById(id).innerText);
             alert("کپی شد!");
         }
+
+                async function fetchGemini(model, payload) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            
+            // Retry strategy with backoff
+            for (let i = 0; i < 3; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) return await response.json();
+                    
+                    if (response.status === 401 || response.status === 403) {
+                        console.warn(`Attempt ${i+1}: Auth error. Retrying...`);
+                        await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+                        continue;
+                    }
+                    
+                    throw new Error(`HTTP ${response.status}`);
+                } catch (err) {
+                    if (i === 2) throw err;
+                }
+            }
+            return null;
+        }
+
+        async function generateTTS() {
+            const text = document.getElementById('ttsInput').value;
+            const voice = document.getElementById('voiceSelect').value;
+            if(text.trim().length < 2) return alert("لطفاً متنی برای تبدیل به صدا وارد کنید.");
+…            view.setUint16(34, 16, true);
+            writeString(36, 'data');
+            view.setUint32(40, pcmData.byteLength, true);
+            new Uint8Array(buffer, 44).set(pcmData);
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
     </script>
 </body>
 
 </html>
+
