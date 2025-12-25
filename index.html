@@ -363,16 +363,42 @@
                 </div>
 
                  <!-- AI Tool 7: TTS (Restored) -->
-                 <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
+                </div>
+
+                <!-- Tool: TTS with Multiple Voices -->
+                <div class="bg-slate-900/50 p-8 rounded-2xl border border-teal-500/30 backdrop-blur-sm">
                     <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                        <span class="text-2xl">🔊</span> تبدیل متن به گفتار
+                        <span class="text-2xl">🔊</span> تبدیل متن به گفتار (چند صدا)
                     </h3>
-                    <textarea id="ttsInput" class="w-full h-24 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 mb-4" placeholder="متن را وارد کنید..."></textarea>
-                    <button id="ttsBtn" onclick="generateTTS()" class="w-full py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold">تولید فایل صوتی</button>
-                    <div id="loadingIndicatorTTS" class="hidden mt-4 text-center text-teal-400">در حال تولید صدا...</div>
+                    <textarea id="ttsInput" class="w-full h-24 p-4 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 mb-4" placeholder="متن را برای تبدیل به صدا وارد کنید..."></textarea>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="text-xs text-teal-400 mb-1 block mr-2">انتخاب صدا:</label>
+                            <select id="voiceSelect" class="w-full p-3 bg-slate-950 border border-slate-700 rounded-xl text-white focus:border-teal-500 outline-none">
+                                <option value="Kore">زن (Kore) - مهربان و رسمی</option>
+                                <option value="Puck">مرد/پسر (Puck) - جوان و پرانرژی</option>
+                                <option value="Charon">مرد (Charon) - عمیق و جدی</option>
+                                <option value="Fenrir">مرد (Fenrir) - قدرتمند</option>
+                                <option value="Aoede">زن (Aoede) - آرام و دلنشین</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button id="ttsBtn" onclick="generateTTS()" class="w-full py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition font-bold shadow-lg shadow-teal-900/40">تولید فایل صوتی</button>
+                        </div>
+                    </div>
+
+                    <div id="loadingIndicatorTTS" class="hidden mt-4 text-center text-teal-400 flex items-center justify-center gap-2">
+                        <svg class="animate-spin h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span>در حال تولید صدا با هوش مصنوعی...</span>
+                    </div>
+
                     <div id="ttsOutputContainer" class="hidden mt-6 p-4 bg-slate-800 rounded-lg border-r-4 border-teal-500">
-                        <h4 id="outputTitleTTS" class="font-bold mb-2 text-white">فایل صوتی آماده:</h4>
-                        <audio id="audioPlayer" controls class="w-full rounded-lg"></audio>
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-bold text-white">خروجی صوتی:</h4>
+                            <button onclick="document.getElementById('audioPlayer').play()" class="text-xs text-teal-400 hover:text-teal-300">پخش مجدد</button>
+                        </div>
+                        <audio id="audioPlayer" controls class="w-full rounded-lg h-10"></audio>
                     </div>
                 </div>
 
@@ -679,4 +705,5 @@
         }
     </script>
 </body>
+
 </html>
